@@ -9,3 +9,4 @@ export const Input = (props) => {
                placeholder={props.placeholder}/>
     )
 }
+
