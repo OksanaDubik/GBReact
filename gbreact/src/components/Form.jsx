@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {Input} from "./Input";
 import {Button} from "./Button";
-import '../App.css';
 import {Textarea} from "./Textarea";
+import {ListItem} from "./ListItem";
+
+import {nanoid} from 'nanoid'
+import '../App.css';
 
 export const Form = () => {
     const [value, setValue] = useState('')
@@ -10,17 +13,20 @@ export const Form = () => {
     const [messages, setMessages] = useState([])
 
     const name = 'отправить'
-    const placeholderText = 'можешь написать свой текст'
-    const placeholderAuthor = 'можешь представиться, если захочешь'
+    const placeholderText = 'Твой текст'
+    const placeholderAuthor = 'Твоё имя'
+    const inputElement = React.createRef();
+
 
     const createClick = () => {
-        setMessages(pervstate => [...pervstate, {value: value}, {author: author}])
+        setMessages(pervstate => [...pervstate, {id: nanoid(5)}, {value: value}, {author: author}])
         setAuthor('')
         setValue('')
     }
 
     const creatChange = (ev) => {
         setValue(ev.target.value)
+
     }
 
     const creatChangeTwo = (eve) => {
@@ -29,28 +35,28 @@ export const Form = () => {
 
 
     useEffect(() => {
-
         setTimeout(() => {
             if (messages.length > 0 && messages[messages.length - 1]?.author !== "bot") {
-
                 if (messages[messages.length - 1]?.author !== "") {
-                    setMessages(prevState => [...prevState, {value: "Ответ робота", author: "bot"}])
+                    setMessages(prevState => [...prevState, {id: nanoid(5), value: "Ответ робота: ", author: "bot"}])
                 }
             }
         }, 2500)
+        inputElement.current.focus();
+
     }, [messages])
 
     return <div className='form'>
-
-        <ul>
-            {messages.map((message, ind) =>
-                <li key={ind} className='list'>
-                    {message.value}
-                </li>
+        <ListItem author={messages.author} messages={messages}/>
+        <div className='list-mess'>
+            {messages.map((message, id) =>
+                <h3 key={id}>{message.value}
+                    {message.author} </h3>
             )}
-        </ul>
+        </div>
         <div className='form-input'>
-            <Textarea className='input textarea' change={creatChange} value={value} placeholder={placeholderText}/>
+            <Textarea inputRef={inputElement} className='textarea' change={creatChange} value={value}
+                      placeholder={placeholderText}/>
             <Input className='input' change={creatChangeTwo} value={author} placeholder={placeholderAuthor}/>
             <Button className='btn' name={name} onClick={createClick}/>
         </div>

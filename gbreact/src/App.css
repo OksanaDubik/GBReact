@@ -1,7 +1,10 @@
 .App {
-    padding-top: 150px;
+
+    padding-top: 90px;
     text-align: center;
-    background-color: #282c34;
+    background: url("https://kartinkin.net/uploads/posts/2021-07/1626118758_24-kartinkin-com-p-sinii-fon-odnotonnii-krasivo-25.jpg");
+    background-size: 100%;
+    /*background-color: #282c34;*/
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -10,16 +13,13 @@
     color: white;
 }
 
-.text {
-    margin-top: 5px;
-}
-
-ul {
+.list-mess {
+    margin: 0 0 0 20px;
     width: 50%;
     word-wrap: break-word;
 }
 
-ul li:not(:first-child) {
+.list-mess h3:not(:first-child) {
     border-radius: 15px;
     background-color: ghostwhite;
     color: #000043;
@@ -31,16 +31,18 @@ ul li:not(:first-child) {
     display: flex;
     justify-content: space-between;
     margin: 0 20px
-
 }
 
 .form-input {
-    margin: 20px 50px;
+    margin: 20px 50px 0 20px;
     width: 30%;
     color: #000043;
 }
+.btn{
+    background-color: #172674
+}
 
-.btn:hover, .input:hover {
+.btn:hover,.input:hover,.textarea:hover{
     outline: 5px solid #becdec;
     cursor: pointer;
 }
@@ -49,20 +51,18 @@ ul li:not(:first-child) {
     outline: 1px solid ghostwhite;
     margin: 10px 0;
     width: 100%;
-    min-height: 20%;
-    color: #000043;
+    height: 50px;
+    color: #f5f5f7;
+    background: #172674;
 }
 
-.textarea {
-    height: 30vh;
+.textarea:focus-visible{
+    border:2px solid #0e133b;
 }
 
 .list {
     list-style: none;
 }
 
-ul li:last-child {
-    color: red;
-}
 
 
