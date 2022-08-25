@@ -3,6 +3,7 @@ import {Input} from "./Input";
 import {Button} from "./Button";
 import {Textarea} from "./Textarea";
 import {ListItem} from "./ListItem";
+import {Navigation} from "./Navigation";
 
 import {nanoid} from 'nanoid'
 import '../App.css';
@@ -17,9 +18,8 @@ export const Form = () => {
     const placeholderAuthor = 'Твоё имя'
     const inputElement = React.createRef();
 
-
     const createClick = () => {
-        setMessages(pervstate => [...pervstate, {id: nanoid(5)}, {value: value}, {author: author}])
+        setMessages(pervstate => [...pervstate, {id: nanoid(5), value: value + " ", author: " (" + author + ")"}])
         setAuthor('')
         setValue('')
     }
@@ -33,7 +33,6 @@ export const Form = () => {
         setAuthor(eve.target.value)
     }
 
-
     useEffect(() => {
         setTimeout(() => {
             if (messages.length > 0 && messages[messages.length - 1]?.author !== "bot") {
@@ -46,19 +45,29 @@ export const Form = () => {
 
     }, [messages])
 
-    return <div className='form'>
-        <ListItem author={messages.author} messages={messages}/>
-        <div className='list-mess'>
-            {messages.map((message, id) =>
-                <h3 key={id}>{message.value}
-                    {message.author} </h3>
-            )}
+    return <div>
+
+        <div style={{display: "flex"}}>
+            <Navigation/>
         </div>
-        <div className='form-input'>
-            <Textarea inputRef={inputElement} className='textarea' change={creatChange} value={value}
-                      placeholder={placeholderText}/>
-            <Input className='input' change={creatChangeTwo} value={author} placeholder={placeholderAuthor}/>
-            <Button className='btn' name={name} onClick={createClick}/>
+
+        <div className='form'>
+
+            <ListItem />
+            <div className='list-mess'>
+                {messages.map((message, id) =>
+                    <h3 key={id}>{message.value}
+                        {message.author} </h3>
+                )}
+            </div>
+
+            <div className='form-input'>
+                <Textarea inputRef={inputElement} className='textarea' change={creatChange} value={value}
+                          placeholder={placeholderText}/>
+                <Input className='input' change={creatChangeTwo} value={author} placeholder={placeholderAuthor}/>
+                <Button className='btn' name={name} onClick={createClick}/>
+
+            </div>
         </div>
     </div>
 }

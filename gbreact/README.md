@@ -68,3 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ListItems: папка с чатами(новости, политика погода, природа)
+components: папка с формой
+form составляют компоненты: Button,Input, ListItem, Textarea
+Главная страница Homepage
