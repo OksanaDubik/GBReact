@@ -109,14 +109,11 @@ import {Navigation} from "./Navigation";
 import {nanoid} from 'nanoid'
 import '../App.css';
 
-
 export const Form = () => {
     const [value, setValue] = useState('')
     const [author, setAuthor] = useState('')
     const [messages, setMessages] = useState([])
 
-    const a=messages
-    console.log(a)
     const name = 'отправить'
     const placeholderText = 'Твой текст'
     const placeholderAuthor = 'Твоё имя'
@@ -149,8 +146,6 @@ export const Form = () => {
 
     }, [messages])
 
-
-
     return <div>
 
         <div style={{display: "flex"}}>
@@ -159,7 +154,8 @@ export const Form = () => {
 
         <div className='form'>
 
-            <ListItem messageSet={messages} />
+          <ListItem messageSet={messages} />
+
             <div className='list-mess'>
                 {messages.map((message, id) =>
                     <h3  key={id}>{message.value}

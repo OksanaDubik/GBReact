@@ -1,15 +1,24 @@
 import React from 'react';
 import {Form} from "../Form";
-import {ListItem} from "../ListItem";
+import {useNavigate} from 'react-router'
 
-export const ChatsWeather = ({listValue, listAuthor}) => {
+import Buttons from '@mui/material/Button';
 
+export const ChatsWeather = () => {
+    const hist = useNavigate();
 
     return (
         <div>
             <h1>ChatsWeather</h1>
             <Form />
-
+            <Buttons style={{
+                backgroundColor: "#172674"
+            }}
+                     sx={{
+                         backgroundColor: "#172674",
+                         outline: "1px solid ghostwhite"
+                     }} variant="contained"  onClick={() => hist(-1)}>Go Back
+            </Buttons>
         </div>
     );
 };

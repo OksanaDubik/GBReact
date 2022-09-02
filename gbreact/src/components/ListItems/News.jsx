@@ -1,36 +1,25 @@
-// import React, {useEffect} from 'react';
-// import {Form} from "../Form";
-// import {useNavigate} from 'react-router'
-//
-//
-// export const News = () => {
-//       const hist = useNavigate();
-//
-//     return (
-//         <div>
-//             <h1>News</h1>
-//             <Form />
-//            <button onClick={() => hist(-1)}>Go Back</button>
-//         </div>
-//     );
-// };
-
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Form} from "../Form";
-import {useNavigate, useLocation} from 'react-router'
-import {ListItem} from "../ListItem";
+import {useNavigate} from 'react-router'
 
+import Buttons from '@mui/material/Button';
 
-export const News = ({messageSet}) => {
-      const hist = useNavigate();
-const location = useLocation()
-    console.log(location)
+export const News = () => {
+    const hist = useNavigate();
+
     return (
         <div>
             <h1>News</h1>
 
-            <Form  />
-           <button onClick={() => hist(-1)}>Go Back</button>
+            <Form/>
+            <Buttons style={{
+                backgroundColor: "#172674"
+            }}
+                     sx={{
+                         backgroundColor: "#172674",
+                         outline: "1px solid ghostwhite"
+                     }} variant="contained" onClick={() => hist(-1)}>Go Back
+            </Buttons>
         </div>
     );
 };

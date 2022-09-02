@@ -10,9 +10,7 @@ import {ChatsWeather} from "./components/ListItems/ChatsWeather";
 import {ChatsNature} from "./components/ListItems/ChatsNature";
 import {ChatsPolitics} from "./components/ListItems/ChatsPolitics";
 
-
 export const App = () => {
-
     return (
 
         <div className="App">
@@ -32,7 +30,6 @@ export const App = () => {
         </div>
     );
 }
-
 
 
 // import React from "react";
@@ -75,5 +72,6 @@ export const App = () => {
 //         </div>
 //     );
 // }
+
 
 
