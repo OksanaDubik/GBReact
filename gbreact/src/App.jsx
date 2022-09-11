@@ -55,15 +55,17 @@ const initialChats = [
         name: "form"
     }
 ]
-const initialMessage = {
-    default: [
+//TODO изменение исправил на массив, так как map не работает с объектами
+// Из за этого изменения я переделал в компоненте messageList логику.
+const initialMessage = [
         {
-        id: 1,
-        author: "User",
-        value: "Hello, User"
+            id: 1,
+            author: "User",
+            value: "Hello, User",
+            chatId:'default'
+         }
+    ]
 
-    },],
- };
 
 export const App = () => {
     const [chatList, setChatList] = useState(initialChats)
