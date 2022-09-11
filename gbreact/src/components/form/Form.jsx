@@ -193,18 +193,28 @@ import {MessageList} from "./MessageList";
 
 export const Form = ({chatList, onAddChat, messages, setMessages}) => {
     const {chatId} = useParams()
-    console.log("chatId", chatId)
+    console.log(chatId)
+    
+    // console.log("chatId", chatId)
     const [value, setValue] = useState('')
     const [author, setAuthor] = useState('')
     const inputElement = React.createRef();
 
     const createClick = () => {
+        //TODO тут ошибка, что messages (pervstate) не итерируется. Так как messages это не массив в объект
+        // Исправляем на массив в initialState в App js
+        // Добавлять скобки к полю author и пустую строку к value нет смысла. value итак строковые данные
+        // ну а хранить значение в скобках внутри объектов не нужно.
+        //Статайресь соблюдать структуру данных. Если у вас структура объекта message одна и данные там одного типа
+        // - так должно быть везде
         setMessages((prevState) => [
             ...prevState,
             {
                 id: nanoid(5),
-                value: value + " ",
-                author: " (" + author + ")"
+                value: value,
+                author: author,
+                //добавил chatID чтобы сообщение знало к какому чату относится
+                chatId:chatId
             }
         ])
         setAuthor('')
@@ -225,7 +235,9 @@ export const Form = ({chatList, onAddChat, messages, setMessages}) => {
             if (messages.length > 0 && messages[messages.length - 1]?.author !== "bot") {
                 if (messages[messages.length - 1]?.author !== "") {
                     // setMessages(prevState => [...prevState, {id: nanoid(5), value: "Ответ робота: ", author: "bot"}])
-                    setMessages([...messages, {id: nanoid(5), value: "Ответ робота: ", author: "bot"}])
+                    // TODO Добавил в объект нового сообщения поле chatID чтобы отслеживать какому чату принаджежит сообщение
+                    //
+                    setMessages(prev => [...prev, {id: nanoid(5), value: "Ответ робота: ", author: "bot", chatId:chatId}])
                 }
             }
         }, 1500)
@@ -236,8 +248,15 @@ export const Form = ({chatList, onAddChat, messages, setMessages}) => {
         <div className='form'>
             <ListItem chatList={chatList} onAddChat={onAddChat}/>
 
-            <MessageList messages={chatId ? messages[chatId] : []}/>
-            {/*<MessageList messages={ messages[chatId]}/>*/}
+            {/* //TODO Тут ошибка, так как chatID это строковое значение а подобная запись arr[index]
+            //работает только в том случае если мы передаем число. Поэтому либо id чата нужно делать числом
+            вы же пытались получить значение из массива по индексу, который является строкой( так не работает)
+            array[0] - вернет элемент по индексу ноль
+            array['id'] - вернет undefined так как такого индекса никогда не существует в массиве
+            //либо переписать логику по изъятию элемента из массива. Я сделал вторым способом */}
+            {/* Пробегаемся по массиву фильтром чтобы найти только те сообщения у которых чат id совпадает с id из хука */}
+            <MessageList messages={chatId ? messages.filter((e)=> e.chatId === chatId) : []}/>
+           
             <div className='form-input'>
                 <Textarea inputRef={inputElement} className='textarea' change={creatChange} value={value}
                           placeholder='Твой текст'/>
