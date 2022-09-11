@@ -1,17 +1,44 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import {Message} from "../Message";
+import {Link, NavLink, Outlet} from "react-router-dom";
+import '../App.css'
 
-export const Navigation=()=>{
-    const text = "Я создал первый компонент"
-    return(
+const navigate = [
+    {
+        id: 1,
+        to: '/',
+        name: 'Homepage'
+    },
+    {
+        id: 2,
+        to: '/profilePage',
+        name: 'ProfilePage'
+    },
+    {
+        id: 3,
+        to: '/form',
+        name: 'Form'
+    }
+]
+
+export const Navigation = () => {
+
+    return (
         <>
-            <nav className="links">
-                <Link to="/">Homepage</Link>
-                <Link to="/profilePage">ProfilePage</Link>
-                <Link to="/form">Form</Link>
-            </nav>
-            <Message text={text}/>
+            <h1>Я создал первый компонент</h1>
+            <ul className="links">
+                {navigate.map((link, i) =>
+                    <li className="links" key={link.id}>
+                        <NavLink to={link.to}
+                                 style={({isActive}) => ({color: isActive ? 'yellow' : 'white'})}
+                        >{link.name}
+                        </NavLink>
+                    </li>
+                )}
+            </ul>
+
+            <div>
+                <Outlet/>
+            </div>
         </>
     )
 }

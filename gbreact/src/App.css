@@ -65,10 +65,9 @@
     list-style: none;
 }
 
-.links a {
-    list-style: none;
-    color: white;
+.links {
     padding: 5px;
+    display: flex;
 }
 
 .todos ul {
@@ -86,6 +85,7 @@
     color: red;
     cursor: pointer;
 }
-.todos input:checked + span{
+
+.todos input:checked + span {
     text-decoration: line-through;
 }

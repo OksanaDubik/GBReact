@@ -1,8 +1,7 @@
 import React from 'react';
-import {Form} from "../Form";
 import {useNavigate} from 'react-router'
-
 import Buttons from '@mui/material/Button';
+import {Form} from "../form/Form";
 
 export const ChatsNature = () => {
     const hist = useNavigate();
